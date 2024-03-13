@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
@@ -7,7 +6,7 @@ import java.util.List;
 /**
  * 对象转换对象
  */
-public class Main {
+public class Main_SimpleOrgJson {
 
     public static void main(String[] args) {
 
@@ -21,8 +20,8 @@ public class Main {
 //        jsonMappings.add(new JsonMapping("root.dev", "root.Values", 4));
         jsonMappings.add(new JsonMapping("root.dev.a", "root.Values[*].StationNo", 3));
 //        jsonMappings.add(new JsonMapping("root.dev.a", "root.Values[*].Values", 4));
-        jsonMappings.add(new JsonMapping("root.dev.a.1", "root.Values[*].Values[*].address", 4));
-        jsonMappings.add(new JsonMapping("root.dev.a.1", "root.Values[*].Values[*].address", 2));
+        jsonMappings.add(new JsonMapping("root.dev.a.1", "root.Values[*].Values[*].address", 3));
+        jsonMappings.add(new JsonMapping("root.dev.a.1", "root.Values[*].Values[*].Value.value", 4));
 
 
         JsonTranferUtil jsonTranferUtil = null;

@@ -3,6 +3,7 @@
  */
 public class JsonMapping {
 
+
     /// <summary>
     /// 要转换的目标Json路径
     /// </summary>

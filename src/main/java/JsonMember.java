@@ -16,7 +16,7 @@ public class JsonMember {
     private String type;
 
 
-    private JsonNode value;
+//    private JsonNode value;
 
 
     private String path;
@@ -24,7 +24,7 @@ public class JsonMember {
     @JsonIgnore
     private JsonMember parent;
 
-    private JsonNode jsonNode;
+//    private JsonNode jsonNode;
 
 
     private List<JsonMember> children = new ArrayList<>();
@@ -48,14 +48,14 @@ public class JsonMember {
     }
 
 
-    public JsonNode getValue() {
-        return value;
-    }
-
-    public void setValue(JsonNode value) {
-        this.value = value;
-    }
-
+    //    public JsonNode getValue() {
+//        return value;
+//    }
+//
+//    public void setValue(JsonNode value) {
+//        this.value = value;
+//    }
+//
     public String getPath() {
         return path;
     }
@@ -82,13 +82,28 @@ public class JsonMember {
     }
 
 
-    public JsonNode getJsonNode() {
-        return jsonNode;
+    public static JsonNode getJsonNode(JsonNode root, String path) {
+        String[] paths = path.split("\\.|\\[");
+        JsonNode curNode = root;
+        if (paths.length > 0) {
+            int index = 1;//这里设置1的原因是因为默认的root节点是动态添加的，在传入的报文中不会存在这一个节点，所以从第二个节点开始
+            while (index < paths.length) {
+                if (curNode.isObject()) {
+                    curNode = curNode.get(paths[index]);
+                } else if (curNode.isArray()) {
+                    int arrIndex = Integer.valueOf(paths[index].replace("[", "").replace("]", ""));
+                    curNode = curNode.get(arrIndex);
+                }
+                index++;
+            }
+            return curNode;
+        }
+        return null;
     }
 
-    public void setJsonNode(JsonNode jsonNode) {
-        this.jsonNode = jsonNode;
-    }
+//    public void setJsonNode(JsonNode jsonNode) {
+//        this.jsonNode = jsonNode;
+//    }
 
 //
 //    public JsonMember cloneDeep() {

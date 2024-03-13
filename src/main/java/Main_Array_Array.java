@@ -23,11 +23,17 @@ public class Main_Array_Array {
 //        jsonMappings.add(new JsonMapping("root.Name_Org", "root[*].Value", 4));
 
 
-        String resultStr = new JsonTranferUtils().tranJson(orgJson, aimJson, jsonMappings);
+        JsonTranferUtil jsonTranferUtil = null;
+        try {
+            jsonTranferUtil = new JsonTranferUtil(orgJson,aimJson,jsonMappings);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String tranJsonResult=jsonTranferUtil.tranJson();
 
         System.out.println("******************结果 **********************");
 
-        System.out.println("The Result:" + resultStr);
+        System.out.println("The Result:" + tranJsonResult);
 
 
 
