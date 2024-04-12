@@ -81,25 +81,62 @@ public class JsonMember {
         this.children = children;
     }
 
-
-    public static JsonNode getJsonNode(JsonNode root, String path) {
-        String[] paths = path.split("\\.|\\[");
-        JsonNode curNode = root;
-        if (paths.length > 0) {
-            int index = 1;//这里设置1的原因是因为默认的root节点是动态添加的，在传入的报文中不会存在这一个节点，所以从第二个节点开始
-            while (index < paths.length) {
-                if (curNode.isObject()) {
-                    curNode = curNode.get(paths[index]);
-                } else if (curNode.isArray()) {
-                    int arrIndex = Integer.valueOf(paths[index].replace("[", "").replace("]", ""));
-                    curNode = curNode.get(arrIndex);
+    /**
+     * 依据路径获取JsonNode
+     * @param root
+     * @param path
+     * @return
+     */
+    public static JsonNode getJsonNodeByPath(JsonNode root, String path) {
+        try {
+            String[] paths = path.split("\\.|\\[");
+            JsonNode curNode = root;
+            if (paths.length > 0) {
+                int index = 1;//这里设置1的原因是因为默认的root节点是动态添加的，在传入的报文中不会存在这一个节点，所以从第二个节点开始
+                while (index < paths.length) {
+                    if (curNode.isObject()) {
+                        curNode = curNode.get(paths[index]);
+                    } else if (curNode.isArray()) {
+                        int arrIndex = Integer.valueOf(paths[index].replace("[", "").replace("]", ""));
+                        curNode = curNode.get(arrIndex);
+                    }
+                    index++;
                 }
-                index++;
+                return curNode;
             }
-            return curNode;
+        }catch(Exception ex)
+        {
+
         }
         return null;
     }
+
+    /**
+     * 依据路径获取JsonMember
+     *
+     * @param jsonMember
+     * @param path
+     * @return
+     */
+    public static JsonMember getJsonMemeberByPath(JsonMember jsonMember, String path) {
+        if (jsonMember != null) {
+            if (jsonMember.getPath().equals(path)) {
+                return jsonMember;
+            } else {
+                if (jsonMember.getChildren().size() > 0) {
+                    for (int i = 0; i < jsonMember.getChildren().size(); i++) {
+                        JsonMember childJsonMember = getJsonMemeberByPath(jsonMember.getChildren().get(i), path);
+                        if (childJsonMember != null) {
+                            return childJsonMember;
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+
+    }
+
 
 //    public void setJsonNode(JsonNode jsonNode) {
 //        this.jsonNode = jsonNode;

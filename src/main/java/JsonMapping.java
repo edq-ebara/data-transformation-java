@@ -21,6 +21,11 @@ public class JsonMapping {
     /// 4：源Value->目标Value
     public int tranType;
 
+    /**
+     * Json映射选项
+     */
+    public JsonMappingOptions options=new JsonMappingOptions();
+
 
     public String getAimJsonPath() {
         return aimJsonPath;
@@ -47,6 +52,14 @@ public class JsonMapping {
         this.tranType = tranType;
     }
 
+    public JsonMappingOptions getOptions() {
+        return options;
+    }
+
+    public void setOptions(JsonMappingOptions options) {
+        this.options = options;
+    }
+
 
     public JsonMapping() {
 
@@ -56,6 +69,14 @@ public class JsonMapping {
         setAimJsonPath(_aimJsonPath);
         setOrgJsonPath(_orgJsonPath);
         setTranType(_tranType);
+    }
+
+
+    public JsonMapping(String _aimJsonPath, String _orgJsonPath, int _tranType,JsonMappingOptions _options) {
+        setAimJsonPath(_aimJsonPath);
+        setOrgJsonPath(_orgJsonPath);
+        setTranType(_tranType);
+        setOptions(_options);
     }
 
 }

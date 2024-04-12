@@ -19,16 +19,17 @@ public class Main_Array_Object {
         List<JsonMapping> jsonMappings = new ArrayList<>();
         jsonMappings.add(new JsonMapping("root", "root", 4));
         jsonMappings.add(new JsonMapping("root.Name_Org", "root[*].Name", 3));
-        jsonMappings.add(new JsonMapping("root.Name_Org", "root[*].Value", 4));
+//        jsonMappings.add(new JsonMapping("root.Name_Org", "root[*].Value", 4));
 
 
         JsonTranferUtil jsonTranferUtil = null;
+        String tranJsonResult="";
         try {
             jsonTranferUtil = new JsonTranferUtil(orgJson,aimJson,jsonMappings);
+            tranJsonResult=jsonTranferUtil.tranJson();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String tranJsonResult=jsonTranferUtil.tranJson();
 
         System.out.println("******************结果 **********************");
 

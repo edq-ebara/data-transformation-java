@@ -24,17 +24,20 @@ public class Main_Check {
 
 
         JsonTranferUtil jsonTranferUtil = null;
+        List<CheckResult> checkResult =null;
         try {
             jsonTranferUtil = new JsonTranferUtil(orgJson, aimJson, jsonMappings);
+            checkResult = jsonTranferUtil.checkJsonMapping();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        List<CheckResult> checkResult = jsonTranferUtil.checkJsonMapping();
 
         System.out.println("******************结果 **********************");
         ObjectMapper mapper = new ObjectMapper();
         try {
             System.out.println(mapper.writeValueAsString(checkResult));
+            System.out.println(mapper.writeValueAsString(jsonTranferUtil.getTranLogs()));
+            System.out.println(mapper.writeValueAsString(jsonTranferUtil.getTranErrors()));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }

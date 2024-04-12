@@ -8,8 +8,8 @@ public class Main_Array_Array {
 
     public static void main(String[] args) {
 
-        String orgJson = "[{\"Name\":\"11\",\"Value\":\"22\"},{\"Name\":\"aa\",\"Value\":\"bb\"}]"; // JSON字符串
-        String aimJson = "[{\"Name_Aim\":\"a1\",\"Value_Aim\":\"b1\"}]"; // JSON字符串
+        String orgJson = "{\"devOrg\":[{\"Name\":\"11\",\"Value\":\"1111\"},{\"Name\":\"22\",\"Value\":\"2222\"}]}"; // JSON字符串
+        String aimJson = "{\"devAim\":[{\"Name_Aim\":\"a1\",\"Value_Aim\":\"b1\"}]}"; // JSON字符串
 
 
         /// 1：源Key->目标Key
@@ -17,25 +17,25 @@ public class Main_Array_Array {
         /// 3：源Value->目标Key
         /// 4：源Value->目标Value
         List<JsonMapping> jsonMappings = new ArrayList<>();
-        jsonMappings.add(new JsonMapping("root", "root", 4));
-        jsonMappings.add(new JsonMapping("root[*].Name_Aim", "root[*].Name", 3));
-        jsonMappings.add(new JsonMapping("root[*].Name_Aim", "root[*].Name", 4));
+//        jsonMappings.add(new JsonMapping("root", "root", 4));
+        jsonMappings.add(new JsonMapping("root.devAim[0]", "root.devOrg[1].*", 4));
+//        jsonMappings.add(new JsonMapping("root[*].Name_Aim", "root[*].Name", 4));
 //        jsonMappings.add(new JsonMapping("root.Name_Org", "root[*].Value", 4));
 
 
         JsonTranferUtil jsonTranferUtil = null;
+        String tranJsonResult =null;
         try {
-            jsonTranferUtil = new JsonTranferUtil(orgJson,aimJson,jsonMappings);
+            jsonTranferUtil = new JsonTranferUtil(orgJson, aimJson, jsonMappings);
+            tranJsonResult =jsonTranferUtil.tranJson();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String tranJsonResult=jsonTranferUtil.tranJson();
+
 
         System.out.println("******************结果 **********************");
 
         System.out.println("The Result:" + tranJsonResult);
-
-
 
 
     }

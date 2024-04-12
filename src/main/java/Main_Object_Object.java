@@ -17,19 +17,21 @@ public class Main_Object_Object {
         /// 3：源Value->目标Key
         /// 4：源Value->目标Value
         List<JsonMapping> jsonMappings = new ArrayList<>();
-        jsonMappings.add(new JsonMapping("root.Name_Aim", "root.Name_Org", 3));
+        jsonMappings.add(new JsonMapping("root.Name_Aim", "root.Name_Org", 1));
         jsonMappings.add(new JsonMapping("root.Age_Aim", "root.Age_Org", 3));
         jsonMappings.add(new JsonMapping("root.Name_Aim", "root.Name_Org", 4));
         jsonMappings.add(new JsonMapping("root.Age_Aim", "root.Age_Org", 4));
-
+        jsonMappings.add(new JsonMapping("root.Name_Aim", "root", 2));
 
         JsonTranferUtil jsonTranferUtil = null;
+        String tranJsonResult=null;
         try {
             jsonTranferUtil = new JsonTranferUtil(orgJson,aimJson,jsonMappings);
+            tranJsonResult=jsonTranferUtil.tranJson();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String tranJsonResult=jsonTranferUtil.tranJson();
+
 
         System.out.println("******************结果 **********************");
 

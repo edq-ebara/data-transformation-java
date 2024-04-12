@@ -25,12 +25,13 @@ public class Main_SimpleOrgJson {
 
 
         JsonTranferUtil jsonTranferUtil = null;
+        String checkResult ="";
         try {
             jsonTranferUtil = new JsonTranferUtil(orgJson, aimJson, jsonMappings);
+            checkResult = jsonTranferUtil.getSimpleOrgJson();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String checkResult = jsonTranferUtil.getSimpleOrgJson();
 
         System.out.println("******************结果 **********************");
         ObjectMapper mapper = new ObjectMapper();
